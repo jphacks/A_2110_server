@@ -1,12 +1,12 @@
 import uvicorn
 
 from fastapi import FastAPI
-
+from routers import activity, ranking, user;
 api = FastAPI()
 
-@api.get("/")
-async def root():
-    return {"message": "Hello World"}
+api.include_router(activity.router)
+api.include_router(ranking.router)
+api.include_router(user.router)
 
 
 if __name__ == "__main__":
