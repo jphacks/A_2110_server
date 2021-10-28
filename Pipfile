@@ -4,7 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = "*"
+fastapi = {extras = ["all"], version = "*"}
+pymysql = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 flake8 = "*"
