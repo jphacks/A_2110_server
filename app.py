@@ -1,9 +1,9 @@
 import uvicorn
 
 from fastapi import FastAPI
-from routers import activity , ranking, user;
+import routers.activity as activity
+from routers import ranking, user
 app = FastAPI()
-
 app.include_router(activity.router)
 app.include_router(ranking.router)
 app.include_router(user.router)

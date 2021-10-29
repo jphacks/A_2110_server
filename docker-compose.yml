@@ -1,13 +1,13 @@
 version: "3.0"
 services:
-  api:
+  api_server:
     build: .
     volumes:
       - .dockervenv:/src/.dockerenv
       - .:/src
     ports:
       - "8000:8000"
-  db:
+  db_server:
     image: mysql:8.0
     platform: linux/x86_64 
     environment:
