@@ -1,9 +1,10 @@
 from fastapi import APIRouter
+import schemas.user as user_schema
 router = APIRouter()
 
-@router.get("/user/{user_id}")
+@router.get("/user/{user_id}",response_model=user_schema.Userdata)
 async def user_info():
-  pass
+  return user_schema.Userdata()
 
 @router.post("/user")
 async def register_user():

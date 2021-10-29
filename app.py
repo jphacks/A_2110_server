@@ -1,13 +1,13 @@
 import uvicorn
 
 from fastapi import FastAPI
-from routers import activity, ranking, user;
-api = FastAPI()
+from routers import activity , ranking, user;
+app = FastAPI()
 
-api.include_router(activity.router)
-api.include_router(ranking.router)
-api.include_router(user.router)
+app.include_router(activity.router)
+app.include_router(ranking.router)
+app.include_router(user.router)
 
 
 if __name__ == "__main__":
-    uvicorn.run(api, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

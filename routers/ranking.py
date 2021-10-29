@@ -1,6 +1,8 @@
+from typing import List
 from fastapi import APIRouter
+import schemas.ranking as ranking_schema
 router = APIRouter()
 
-@router.get('ranking')
+@router.get('ranking', response_model=List[ranking_schema.Ranking])
 async def get_ranking():
-  pass
+  return [ranking_schema.Ranking(userid=0,name="a",picture="null",)]
