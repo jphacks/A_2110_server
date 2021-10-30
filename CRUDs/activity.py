@@ -2,11 +2,6 @@ from datetime import datetime
 from typing import List, Optional, Tuple
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import query
-from sqlalchemy.orm.attributes import History
-from sqlalchemy.orm.query import Query
-from sqlalchemy.orm.session import Session
-from sqlalchemy.sql.sqltypes import String
 import models.activity as activity_model
 import schemas.activity as activity_schema
 from sqlalchemy import select

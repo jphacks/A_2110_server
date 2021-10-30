@@ -4,10 +4,10 @@ import datetime
 from pydantic import BaseModel, Field
 
 class Score(BaseModel):
-  exp: int = Field(None, example="経験値")
-  times:int = Field(None, example="運動回数")
-  streak: int = Field(None, example="運動継続日数")
-  activity_length: int = Field(None, example="累計運動時間")
+  exp: int = Field(None, title="経験値")
+  times:int = Field(None, title="運動回数")
+  streak: int = Field(None, title="運動継続日数")
+  activity_length: int = Field(None, titlte="累計運動時間")
   
 class Deadzone(BaseModel):
   x: float = 2
@@ -28,4 +28,14 @@ class Userdata(BaseModel):
   picture: str
   settings: Settings
   score: Score
+  
+class ScoreCreate(Score):
+  pass
+  
+class ScoreDataCreateResponse(ScoreCreate):
+  userid: str
+  class Config:
+    orm_mode = True
+
+
   
