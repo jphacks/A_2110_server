@@ -9,9 +9,17 @@ import CRUDs.activity as activity_crud
 import schemas.activity as activity_schema
 router = APIRouter()
 
-@router.get("/history/{user_id}", response_model=List[activity_schema.History])
+@router.get("/history/{user_id}/track", response_model=List[activity_schema.History])
 async def getactivityhistory(user_id:str,db: AsyncSession = Depends(get_db)):
-  return await activity_crud.get_track_entry(db)
+  return await activity_crud.get_track_entry(db, user_id)
+
+@router.get("/history/{user_id}/record", response_model=List[activity_schema.History])
+async def getactivityhistory(user_id:str,db: AsyncSession = Depends(get_db)):
+  return await activity_crud.get_record_entry(db, user_id)
+
+@router.get("/history/", response_model=List[activity_schema.History])
+async def getallhistory_debug(db: AsyncSession = Depends(get_db)):
+  return await activity_crud.get_all_entry(db)
 
 @router.post("/history/{user_id}", response_model=activity_schema.HistoryCreateResponse)
 async def postactivity(user_id:str,activity_entry: activity_schema.HistoryCreate, db: AsyncSession = Depends(get_db)):
