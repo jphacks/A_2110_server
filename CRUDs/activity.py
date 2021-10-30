@@ -2,11 +2,6 @@ from datetime import datetime
 from typing import List, Optional, Tuple
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import query
-from sqlalchemy.orm.attributes import History
-from sqlalchemy.orm.query import Query
-from sqlalchemy.orm.session import Session
-from sqlalchemy.sql.sqltypes import String
 import models.activity as activity_model
 import schemas.activity as activity_schema
 from sqlalchemy import select
@@ -21,11 +16,30 @@ async def create_entry(
     await db.refresh(history)
     return history
 
-async def get_track_entry(db: AsyncSession)->List[Tuple[activity_model.History]]:
+async def get_track_entry(db: AsyncSession, user_id:str)->List[Tuple[activity_model.History]]:
     result: Result = await (db.execute(
             select(
                 ['*']
-            ).where(activity_model.History.data_type == 'track')
+            ).where((activity_model.History.data_type == 'track') and (activity_model.History.user_id==user_id))
+        )
+    )
+    return result.all()
+
+async def get_record_entry(db: AsyncSession, user_id:str)->List[Tuple[activity_model.History]]:
+    result: Result = await (db.execute(
+            select(
+                ['*']
+            ).where((activity_model.History.data_type == 'record') and (activity_model.History.user_id==user_id))
+        )
+    )
+    return result.all()
+
+
+async def get_all_entry(db: AsyncSession)->List[Tuple[activity_model.History]]:
+    result: Result = await (db.execute(
+            select(
+                ['*']
+            ).where(activity_model.History.data_type == ('track' or 'record'))
         )
     )
     return result.all()
